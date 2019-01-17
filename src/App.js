@@ -25,11 +25,15 @@ class App extends Component { // Obs 01: class App extends React.Component {
   render() {
     // console.table(this.state.todos);
     return (
-      <div className="App">
+      <div className="App" style={appStyle}>
         <Todos todos={this.state.todos} />
       </div>
     );
   }
+}
+
+const appStyle = {
+  backgroundColor: '#fdfdfd',
 }
 
 export default App;
