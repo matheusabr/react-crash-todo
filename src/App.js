@@ -22,11 +22,29 @@ class App extends Component { // Obs 01: class App extends React.Component {
       },
     ]
   }
+
+  // (M) Toggle complete
+  toggleComplete = (id) => {
+    console.log('id', id);
+    this.setState({ todos: this.state.todos.map(todo => {
+      if (todo.id === id) {
+        todo.isCompleted = !todo.isCompleted;
+      }
+      return todo;
+    }) });
+  }
+
+  // (M) Remove todo
+  removeTodo = (id) => {
+    console.log('id', id);
+    this.setState({ todos: [ ...this.state.todos.filter(todo => todo.id !== id)] });
+  }
+
   render() {
     // console.table(this.state.todos);
     return (
       <div className="App" style={appStyle}>
-        <Todos todos={this.state.todos} />
+        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
       </div>
     );
   }
