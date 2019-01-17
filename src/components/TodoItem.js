@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
+  // Dynamic styling
+  getStyle = () => {
+    return {
+      textDecoration: this.props.todo.isCompleted ? 'line-through' : 'none'
+    }
+  }
   render() {
     return (
-      <div style={{ backgroundColor: '#f3f3f3' }}>
-        <p>{this.props.todo.title}</p>
+      <div style={this.getStyle()}>
+        <p style={{ fontSize: 13, fontWeight: 'bold' }}>{this.props.todo.title}</p>
       </div>
     )
   }
