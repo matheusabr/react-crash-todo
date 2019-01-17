@@ -3,6 +3,7 @@ import './App.css';
 // Components
 import Todos from './components/Todos';
 import Header from './components/layout/Header';
+import AddTodo from './components/AddTodo';
 
 class App extends Component { // Obs 01: class App extends React.Component {
   state = {
@@ -47,6 +48,7 @@ class App extends Component { // Obs 01: class App extends React.Component {
     return (
       <div className="App" style={appStyle}>
         <Header />
+        <AddTodo />
         <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
       </div>
     );

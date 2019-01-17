@@ -13,3 +13,17 @@ a {
   color: #333;
   text-decoration: none;
 }
+
+.btn {
+  display: inline-block;
+  flex: 2; 
+  height: 30px;
+  background-color: #666;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #333;
+}
