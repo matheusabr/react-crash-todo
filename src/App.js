@@ -1,6 +1,8 @@
 import React, { Component } from 'react'; // Obs 01: or import React from 'react';
-import Todos from './components/Todos';
 import './App.css';
+// Components
+import Todos from './components/Todos';
+import Header from './components/layout/Header';
 
 class App extends Component { // Obs 01: class App extends React.Component {
   state = {
@@ -44,6 +46,7 @@ class App extends Component { // Obs 01: class App extends React.Component {
     // console.table(this.state.todos);
     return (
       <div className="App" style={appStyle}>
+        <Header />
         <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
       </div>
     );
