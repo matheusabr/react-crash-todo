@@ -21,7 +21,7 @@ class App extends Component { // Obs 01: class App extends React.Component {
 
   // It forces a re-render after update a state
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=4')
       .then(res => {
 				// console.log("​App -> componentDidMount -> res", res);
         // console.table(res.data);
@@ -48,13 +48,12 @@ class App extends Component { // Obs 01: class App extends React.Component {
 
   // (M) Add todo
   addTodo = (title) => {
-		console.log("​App -> addTodo -> title", title);
-    const newTodo = {
-      id: uuid.v4(),
+    console.log("​App -> addTodo -> title", title);
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
       title,
       completed: false,
-    }
-    this.setState({ todos: [ ...this.state.todos, newTodo]});
+    })
+      .then(res =>  this.setState({ todos: [ ...this.state.todos, res.data]}))
   }
 
   render() {
