@@ -29,6 +29,8 @@ export class TodoItem extends Component {
 // Set the property type
 // and if it is required
 TodoItem.propTypes = {
+  toggleComplete: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
 }
 
