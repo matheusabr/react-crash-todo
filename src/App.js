@@ -10,8 +10,8 @@ import Header from './components/layout/Header';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
 
-// Libs
-import uuid from 'uuid';
+// // Libs
+// import uuid from 'uuid';
 import axios from 'axios';
 
 class App extends Component { // Obs 01: class App extends React.Component {
@@ -42,8 +42,9 @@ class App extends Component { // Obs 01: class App extends React.Component {
 
   // (M) Remove todo
   removeTodo = (id) => {
-		console.log("​App -> removeTodo -> id", id);
-    this.setState({ todos: [ ...this.state.todos.filter(todo => todo.id !== id)] });
+    console.log("​App -> removeTodo -> id", id);
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res =>  this.setState({ todos: [ ...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
   // (M) Add todo
