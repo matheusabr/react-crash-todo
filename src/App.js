@@ -4,22 +4,24 @@ import './App.css';
 import Todos from './components/Todos';
 import Header from './components/layout/Header';
 import AddTodo from './components/AddTodo';
+// Libs
+import uuid from 'uuid';
 
 class App extends Component { // Obs 01: class App extends React.Component {
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(),
         title: "Book a hotel near workplace",
         isCompleted: false,
       },
       {
-        id: 2,
+        id: uuid.v4(),
         title: "Meeting with HR",
         isCompleted: true,
       },
       {
-        id: 3,
+        id: uuid.v4(),
         title: "Buy a pass card",
         isCompleted: false,
       },
@@ -39,17 +41,30 @@ class App extends Component { // Obs 01: class App extends React.Component {
 
   // (M) Remove todo
   removeTodo = (id) => {
-    console.log('id', id);
+		console.log("​App -> removeTodo -> id", id);
     this.setState({ todos: [ ...this.state.todos.filter(todo => todo.id !== id)] });
+  }
+
+  // (M) Add todo
+  addTodo = (title) => {
+		console.log("​App -> addTodo -> title", title);
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      isCompleted: false,
+    }
+    this.setState({ todos: [ ...this.state.todos, newTodo]});
   }
 
   render() {
     // console.table(this.state.todos);
     return (
       <div className="App" style={appStyle}>
-        <Header />
-        <AddTodo />
-        <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
+        <div className="container">
+          <Header />
+          <AddTodo addTodo={this.addTodo} />
+          <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
+        </div>
       </div>
     );
   }
