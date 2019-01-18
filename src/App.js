@@ -12,26 +12,21 @@ import About from './components/pages/About';
 
 // Libs
 import uuid from 'uuid';
+import axios from 'axios';
 
 class App extends Component { // Obs 01: class App extends React.Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "Book a hotel near workplace",
-        isCompleted: false,
-      },
-      {
-        id: uuid.v4(),
-        title: "Meeting with HR",
-        isCompleted: true,
-      },
-      {
-        id: uuid.v4(),
-        title: "Buy a pass card",
-        isCompleted: false,
-      },
-    ]
+    todos: [],
+  }
+
+  // It forces a re-render after update a state
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      .then(res => {
+				// console.log("​App -> componentDidMount -> res", res);
+        // console.table(res.data);
+        this.setState({ todos: res.data });
+      })
   }
 
   // (M) Toggle complete
@@ -39,7 +34,7 @@ class App extends Component { // Obs 01: class App extends React.Component {
     console.log('id', id);
     this.setState({ todos: this.state.todos.map(todo => {
       if (todo.id === id) {
-        todo.isCompleted = !todo.isCompleted;
+        todo.completed = !todo.completed;
       }
       return todo;
     }) });
@@ -57,7 +52,7 @@ class App extends Component { // Obs 01: class App extends React.Component {
     const newTodo = {
       id: uuid.v4(),
       title,
-      isCompleted: false,
+      completed: false,
     }
     this.setState({ todos: [ ...this.state.todos, newTodo]});
   }

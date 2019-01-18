@@ -8,16 +8,16 @@ export class TodoItem extends Component {
       background: '#f4f4f4',
       padding: '10px',
       border: '1px #ccc dashed',
-      textDecoration: this.props.todo.isCompleted ? 'line-through' : 'none'
+      textDecoration: this.props.todo.completed ? 'line-through' : 'none'
     }
   }
 
   render() {
-    const { id, title, isCompleted } = this.props.todo;
+    const { id, title, completed } = this.props.todo;
     return (
       <div style={this.getStyle()}>
         <p style={{ fontSize: 13, fontWeight: 'bold' }}>
-          <input type="checkbox" checked={isCompleted} onChange={this.props.toggleComplete.bind(this, id)} /> {' '}
+          <input type="checkbox" checked={completed} onChange={this.props.toggleComplete.bind(this, id)} /> {' '}
           {title}
           <button style={btnRemoveStyle} onClick={this.props.removeTodo.bind(this, id)}>x</button>
         </p>
