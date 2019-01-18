@@ -1,9 +1,15 @@
 import React, { Component } from 'react'; // Obs 01: or import React from 'react';
 import './App.css';
+
+// Router
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 // Components
 import Todos from './components/Todos';
 import Header from './components/layout/Header';
 import AddTodo from './components/AddTodo';
+import About from './components/pages/About';
+
 // Libs
 import uuid from 'uuid';
 
@@ -59,13 +65,23 @@ class App extends Component { // Obs 01: class App extends React.Component {
   render() {
     // console.table(this.state.todos);
     return (
-      <div className="App" style={appStyle}>
-        <div className="container">
-          <Header />
-          <AddTodo addTodo={this.addTodo} />
-          <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
+      <Router>
+        <div className="App" style={appStyle}>
+          <div className="container">
+            {/* Fixed session */}
+            <Header />
+            {/* Dynamic session */}
+            {/* Add exact to show it component only when match path */}
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo} />
+                <Todos todos={this.state.todos} toggleComplete={this.toggleComplete} removeTodo={this.removeTodo} />
+              </React.Fragment>
+            )} />
+            <Route path="/about" component={About} />
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
